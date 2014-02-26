@@ -21,11 +21,17 @@ dependencies {
   compile "org.scala-lang:scala-library:${scalaVersion}"
 
   // ------------------------------------------------------------
+  // Misc. libraries
+
+  compile 'log4j:log4j:1.2+'
+  compile 'com.fasterxml.uuid:java-uuid-generator:3+'
+
+  // ------------------------------------------------------------
   // Testing
 
   testCompile "org.scalatest:scalatest_${scalaMajorVersion}:2.0"
-  testCompile 'junit:junit:4.11'
-  testCompile 'org.mockito:mockito-core:1.9.0'
+  testCompile 'junit:junit:4.+'
+  testCompile 'org.mockito:mockito-core:1.9+'
 }
 
 task wrapper(type: Wrapper) {
