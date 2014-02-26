@@ -15,7 +15,7 @@ case class Entity(id: UUID)
  */
 object Entity {
 
-  // ------------------------------------------------------------
+  // -----------------------------------------------------------
   // Private fields
 
   private val log = Logger.getLogger(classOf[Entity])
