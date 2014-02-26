@@ -8,13 +8,15 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/classes/main/apsu-core" />
-    <output-test url="file://$MODULE_DIR$/build/classes/test/apsu-core" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/scala" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/scala" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
@@ -22,12 +24,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: scala-library-2.10.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: scalatest_2.10-2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: junit-4.11" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: mockito-core-1.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: scala-reflect-2.10.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: objenesis-1.0" level="project" />
-    <orderEntry type="library" name="scala-compiler" level="application" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit-4.12-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: java-uuid-generator-3.1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: mockito-core-1.9.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: log4j-1.2.17" level="project" />
   </component>
 </module>
 
