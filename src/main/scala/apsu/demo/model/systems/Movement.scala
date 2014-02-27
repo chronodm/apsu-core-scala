@@ -4,7 +4,6 @@ import apsu.core.{Entity, Components, System}
 import apsu.demo.model.components.{Velocity, Position}
 
 class Movement(components: Components) extends System {
-
   override def update(e: Entity): Unit = {
     components.get[Position, Velocity](e) match {
       case (Some(p0), Some(v)) =>
@@ -13,5 +12,5 @@ class Movement(components: Components) extends System {
       case _ =>
     }
   }
-
 }
+
