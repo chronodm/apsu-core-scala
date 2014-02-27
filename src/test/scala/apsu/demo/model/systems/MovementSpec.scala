@@ -1,9 +1,7 @@
-package demo.model.systems
+package apsu.demo.model.systems
 
 import apsu.core.{Components, Entity}
 import apsu.demo.model.components.{Position, Velocity}
-import apsu.demo.model.systems.Movement
-import apsu.demo.util.units.{Angle, Distance}
 import org.mockito.Mockito._
 import org.scalatest.mock.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
@@ -14,8 +12,8 @@ class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
 
   "update" should "update entity position based on velocity" in {
     val entity = Entity()
-    val p0 = Position(Distance(0), Distance(0))
-    val v = Velocity(Angle(1.10714872f), Distance(2.23606798f))
+    val p0 = Position(0,0)
+    val v = Velocity(1.10714872, 2.23606798)
 
     val components = mock[Components]
     when(components.get[Position, Velocity](entity)).thenReturn((Some(p0), Some(v)))
@@ -26,11 +24,11 @@ class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
     val captor = ArgumentCaptor.forClass(classOf[Position])
     verify(components).set(same(entity), captor.capture())
 
-    val value = captor.getValue
+    val result = captor.getValue
 
-    value should not be null
+    result should not be null
 
-    value.x.v should be (1.0f +- 0.000001f)
-    value.y.v should be (2.0f +- 0.000001f)
+    result.x should be (1.0 +- 0.000001)
+    result.y should be (2.0 +- 0.000001)
   }
 }
