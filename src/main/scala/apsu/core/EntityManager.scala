@@ -10,6 +10,7 @@ object EntityManager {
    * A function that updates the state of the [[EntityManager]]
    */
   // TODO this is a bit monolithic and stupid, and won't cut it once we have multi-entity updates
+  // TODO also it doesn't do anything to support (let alone enforce) atomicity
   type Update = (EntityManager) => Unit
 
   /**
