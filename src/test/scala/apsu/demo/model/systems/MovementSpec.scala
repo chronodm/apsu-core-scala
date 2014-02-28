@@ -11,6 +11,7 @@ import org.scalatest.{FlatSpec, Matchers}
 import scala.reflect.runtime.{universe => ru}
 
 class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
+  import EntityManager._
 
   "update" should "update entity position based on velocity" in {
     val entity = Entity()
@@ -25,17 +26,15 @@ class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
     // verify()s are a little ugly because Mockito complains if we
     // use matchers for the explicit parameters but not the implicits
 
-    val systemCaptor = ArgumentCaptor.forClass(classOf[(Position, Velocity, Entity) => ((EntityManager) => Unit)])
-    verify(entityMgr).update[Position, Velocity](systemCaptor.capture())
-      (any(classOf[ru.TypeTag[Position]]), any(classOf[ru.TypeTag[Velocity]]))
+    val systemCaptor = ArgumentCaptor.forClass(classOf[Process2[Position, Velocity]])
+    verify(entityMgr).update[Position, Velocity](systemCaptor.capture())(any(classOf[ru.TypeTag[Position]]), any(classOf[ru.TypeTag[Velocity]]))
 
     val system = systemCaptor.getValue
     val update = system(p0, v, entity)
     update(entityMgr)
 
     val positionCaptor = ArgumentCaptor.forClass(classOf[Position])
-    verify(entityMgr).set(same(entity), positionCaptor.capture())
-      (any(classOf[ru.TypeTag[Position]]))
+    verify(entityMgr).set(same(entity), positionCaptor.capture())(any(classOf[ru.TypeTag[Position]]))
 
     val result = positionCaptor.getValue
 
