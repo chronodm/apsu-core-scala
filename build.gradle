@@ -19,6 +19,7 @@ dependencies {
   // Platform
 
   compile "org.scala-lang:scala-library:${scalaVersion}"
+  compile "org.scala-lang:scala-reflect:${scalaVersion}"
 
   // ------------------------------------------------------------
   // Misc. libraries

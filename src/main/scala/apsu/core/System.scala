@@ -1,7 +1,7 @@
 package apsu.core
 
 trait System {
-  def update(e: Entity)
+  def update(components: Components)
 }
 
 /*
