@@ -14,7 +14,7 @@ class Movement {
   }
 
   def setPosition(p1: Position, e: Entity)(c: EntityManager): Unit = {
-    c.set(p1, e)
+    c.set(e, p1)
   }
 }
 

@@ -2,7 +2,9 @@ package apsu.core
 
 import scala.reflect.runtime.{universe => ru}
 
-trait EntityManager {
+object EntityManager {
+  // ------------------------------------------------------------
+  // Types
 
   /**
    * A function that updates the state of the [[EntityManager]]
@@ -19,18 +21,23 @@ trait EntityManager {
    */
   // TODO do processes only ever look at one entity at a time?
   type Process2[C1, C2] = (C1, C2, Entity) => Update
+}
 
-  //  def update[C](process: (C, Entity) => Unit)(implicit ct: ru.TypeTag[C])
+trait EntityManager {
+  import EntityManager._
+
+  // ------------------------------------------------------------
+  // Public methods
 
   def update[C1, C2](process: Process2[C1, C2])
       (implicit ct1: ru.TypeTag[C1], ct2: ru.TypeTag[C2])
 
-  def set[C](c: C, e: Entity)(implicit ct: ru.TypeTag[C])
-
-  //  def set[C1, C2](c1: C1, c2: C2, e: Entity)
+  def set[C](e: Entity, c:C)
+      (implicit ct: ru.TypeTag[C])
 }
 
 class EntityManagerImpl extends EntityManager {
+  import EntityManager._
 
   // TODO there must be a better way to do type-safe heterogeneous containers in Scala, or at least hide the mess
   private var registry: Map[ru.TypeTag[_], Map[Entity, _]] = Map[ru.TypeTag[_], Map[Entity, _]]()
@@ -55,7 +62,7 @@ class EntityManagerImpl extends EntityManager {
     }
   }
 
-  override def set[C](c: C, e: Entity)(implicit ct: ru.TypeTag[C]): Unit = {
+  override def set[C](e: Entity, c: C)(implicit ct: ru.TypeTag[C]): Unit = {
     // TODO this is not thread-safe
     val newM = registry.get(ct) match {
       case Some(m) => m.asInstanceOf[Map[Entity, C]] + (e -> c)
