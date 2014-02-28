@@ -1,12 +1,12 @@
 package apsu.demo.model.systems
 
-import apsu.core.{Entity, EntityManager, System}
+import apsu.core.{Entity, EntityManager}
 import apsu.demo.model.components.{Velocity, Position}
 
-class Movement extends System {
+class Movement {
 
-  override def update(c: EntityManager) = {
-    c.update(move(c) _)
+  def update(c: EntityManager) = {
+    c.update[Position, Velocity](move(c) _)
   }
 
   def move(c: EntityManager)(p0: Position, v: Velocity, e: Entity): (EntityManager) => Unit = {
