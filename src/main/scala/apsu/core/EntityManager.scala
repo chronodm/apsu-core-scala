@@ -2,11 +2,11 @@ package apsu.core
 
 import scala.reflect.runtime.{universe => ru}
 
-trait Components {
+trait EntityManager {
 
   //  def update[C](system: (C, Entity) => Unit)(implicit ct: ru.TypeTag[C])
 
-  def update[C1, C2](system: (C1, C2, Entity) => ((Components) => Unit))(
+  def update[C1, C2](system: (C1, C2, Entity) => ((EntityManager) => Unit))(
     implicit ct1: ru.TypeTag[C1], ct2: ru.TypeTag[C2])
 
   def set[C](c: C, e: Entity)(implicit ct: ru.TypeTag[C])
@@ -14,12 +14,12 @@ trait Components {
   //  def set[C1, C2](c1: C1, c2: C2, e: Entity)
 }
 
-class ComponentsImpl extends Components {
+class EntityManagerImpl extends EntityManager {
 
   // TODO there must be a better way to do type-safe heterogeneous containers in Scala, or at least hide the mess
   private var registry: Map[ru.TypeTag[_], Map[Entity, _]] = Map[ru.TypeTag[_], Map[Entity, _]]()
 
-  override def update[C1, C2](system: (C1, C2, Entity) => (Components) => Unit)(
+  override def update[C1, C2](system: (C1, C2, Entity) => (EntityManager) => Unit)(
     implicit ct1: ru.TypeTag[C1], ct2: ru.TypeTag[C2]): Unit = {
 
     // TODO not only is this slow and un-scala-like it'd be much more concise with flatmap etc.

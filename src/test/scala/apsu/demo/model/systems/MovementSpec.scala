@@ -1,6 +1,6 @@
 package apsu.demo.model.systems
 
-import apsu.core.{ComponentsImpl, Components, Entity}
+import apsu.core.{EntityManagerImpl, EntityManager, Entity}
 import apsu.demo.model.components.{Position, Velocity}
 import org.mockito.Mockito._
 import org.scalatest.mock.MockitoSugar
@@ -15,14 +15,14 @@ class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
     val p0 = Position(0,0)
     val v = Velocity(1.10714872, 2.23606798)
 
-    val components = new ComponentsImpl
-    components.set(p0, entity)
-    components.set(v, entity)
+    val entityMgr = new EntityManagerImpl
+    entityMgr.set(p0, entity)
+    entityMgr.set(v, entity)
 
     val movement = new Movement()
-    movement.update(components)
+    movement.update(entityMgr)
 
-    val result = components.get[Position](entity).get
+    val result = entityMgr.get[Position](entity).get
 
     result should not be null
 
