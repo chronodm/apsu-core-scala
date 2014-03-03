@@ -1,4 +1,4 @@
-package apsu.core
+package apsu.old
 
 import scala.reflect.runtime.{universe => ru}
 import scala.Some

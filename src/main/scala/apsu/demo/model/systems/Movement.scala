@@ -1,6 +1,6 @@
 package apsu.demo.model.systems
 
-import apsu.core.{Entity, EntityManager}
+import apsu.old.{Entity, EntityManager}
 import apsu.demo.model.components.{Velocity, Position}
 
 class Movement {

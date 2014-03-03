@@ -1,6 +1,6 @@
 package apsu.demo.model.systems
 
-import apsu.core.{EntityManagerImpl, EntityManager, Entity}
+import apsu.old.{EntityManagerImpl, EntityManager, Entity}
 import apsu.demo.model.components.{Position, Velocity}
 import org.mockito.ArgumentCaptor
 import org.mockito.Matchers.same

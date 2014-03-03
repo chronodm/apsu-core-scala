@@ -1,4 +1,4 @@
-package apsu.core
+package apsu.old
 
 import org.scalatest.mock.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}

@@ -1,4 +1,4 @@
-package apsu.core
+package apsu.old
 
 import org.scalatest.{FlatSpec, Matchers}
 import java.util.UUID
