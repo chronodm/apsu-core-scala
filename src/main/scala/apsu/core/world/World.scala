@@ -21,6 +21,7 @@ trait World {
 
   private[world] def set[C1](e: Entity, c: C1)
 
+  private[world] def add[C1](e: Entity, c: C1)
 }
 
 

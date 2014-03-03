@@ -10,3 +10,9 @@ case class Set[C1](e: Entity, c: C1) extends Update {
     w.set(e, c)
   }
 }
+
+case class Add[C1](e: Entity, c: C1) extends Update {
+  override def apply(w: World): Unit = {
+    w.add(e, c)
+  }
+}
