@@ -4,6 +4,7 @@ import org.scalatest.mock.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 import org.mockito.Mockito._
 import org.mockito.Matchers._
+import apsu.core.Entity
 
 class EntityManagerImplSpec extends FlatSpec with Matchers with MockitoSugar {
 

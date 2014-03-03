@@ -1,7 +1,6 @@
-package apsu.demo.model.systems
+package apsu.demo.old.systems
 
-import apsu.old.{EntityManagerImpl, EntityManager, Entity}
-import apsu.demo.model.components.{Position, Velocity}
+import apsu.old.{EntityManagerImpl, EntityManager}
 import org.mockito.ArgumentCaptor
 import org.mockito.Matchers.same
 import org.mockito.Mockito._
@@ -9,6 +8,8 @@ import org.mockito.Matchers.any
 import org.scalatest.mock.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 import scala.reflect.runtime.{universe => ru}
+import apsu.core.Entity
+import apsu.demo.model.component.{Velocity, Position}
 
 class MovementSpec extends FlatSpec with Matchers with MockitoSugar {
   import EntityManager._

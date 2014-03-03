@@ -1,9 +1,8 @@
-package apsu.old
+package apsu.core
 
 import org.scalatest.{FlatSpec, Matchers}
 import java.util.UUID
 import java.util
-import java.util.concurrent.TimeUnit
 
 class EntitySpec extends FlatSpec with Matchers {
 

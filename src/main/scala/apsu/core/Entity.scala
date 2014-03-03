@@ -1,4 +1,4 @@
-package apsu.old
+package apsu.core
 
 import com.fasterxml.uuid.{Generators, EthernetAddress}
 import java.util.UUID

@@ -1,5 +1,4 @@
-package apsu.demo.model.components
-
+package apsu.demo.model.component
 
 case class Velocity(theta: Double, r: Double) {
   lazy val deltaX = r * Math.cos(theta)

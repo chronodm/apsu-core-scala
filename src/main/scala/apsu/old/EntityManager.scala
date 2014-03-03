@@ -1,6 +1,7 @@
 package apsu.old
 
 import scala.reflect.runtime.{universe => ru}
+import apsu.core.Entity
 
 object EntityManager {
   // ------------------------------------------------------------

@@ -1,7 +1,8 @@
-package apsu.demo.model.systems
+package apsu.demo.old.systems
 
-import apsu.old.{Entity, EntityManager}
-import apsu.demo.model.components.{Velocity, Position}
+import apsu.old.EntityManager
+import apsu.core.Entity
+import apsu.demo.model.component.{Velocity, Position}
 
 class Movement {
 
