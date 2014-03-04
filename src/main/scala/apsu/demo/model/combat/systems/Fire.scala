@@ -11,10 +11,14 @@ import apsu.demo.model.combat.components.{Weapon, Bullet}
 class Fire extends System {
   override def invoke(w: World): Seq[Update] = {
     (for ((e0, (weapon, fireCmd)) <- w.find[Weapon, DoFire]) yield {
-      val e1 = Entity()
-      val bulletComponent = Bullet()
+
+      // TODO does it make sense to treat weapons as having their own positions/orientations?
+      // TODO if so, how do we keep it updated? in the equipmentification component?
       val position = w.get[Position](e0).getOrElse(Position.Origin)
       val orientation = w.get[Orientation](e0).getOrElse(Orientation.Zero)
+
+      val e1 = Entity()
+      val bulletComponent = Bullet()
       Seq(
         Remove(e0, fireCmd),
         Add(e1, bulletComponent),
