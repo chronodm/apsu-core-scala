@@ -1,5 +1,3 @@
 package apsu.demo.model.ships.components
 
-class RCSThruster {
-
-}
+case class RCSThruster(deltaA: Double)

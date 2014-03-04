@@ -44,10 +44,9 @@ trait World {
    * Gets the components of the specified type for the specified entity
    * @return the components, or None if the entity doesn't have both
    */
-  // TODO should this be a tuple of Options instead of an Option of tuple?
   def get[C1, C2](e: Entity)
       (implicit t1: ru.TypeTag[C1], t2: ru.TypeTag[C2])
-  :Option[(C1, C2)]
+  :(Option[C1], Option[C2])
 
   // ---------------------------------------------
   // Private updaters
