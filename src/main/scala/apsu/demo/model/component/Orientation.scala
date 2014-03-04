@@ -5,3 +5,7 @@ case class Orientation(alpha: Double) {
     Orientation(alpha + w.deltaA)
   }
 }
+
+object Orientation {
+  val Zero = Orientation(0)
+}

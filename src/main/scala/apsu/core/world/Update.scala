@@ -16,3 +16,10 @@ case class Add[C1](e: Entity, c: C1) extends Update {
     w.add(e, c)
   }
 }
+
+case class Remove[C1](e: Entity, c: C1) extends Update {
+  override def apply(w: World): Unit = {
+    w.remove(e, c)
+  }
+}
+

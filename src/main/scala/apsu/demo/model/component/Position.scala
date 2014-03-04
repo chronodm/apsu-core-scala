@@ -5,3 +5,7 @@ case class Position(x: Double, y: Double) {
     Position(x + v.deltaX, y + v.deltaY)
   }
 }
+
+object Position {
+  val Origin = Position(0, 0)
+}
