@@ -8,7 +8,7 @@ import org.apache.log4j.Logger
  * The fundamental building block of the entity system.
  * @param id The UUID of the entity. Two entities with the same UUID are considered identical.
  */
-case class Entity(id: UUID)
+case class Entity private(id: UUID)
 
 /**
  * Factory class for constructing entities.
