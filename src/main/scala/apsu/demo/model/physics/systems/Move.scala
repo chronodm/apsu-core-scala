@@ -1,7 +1,7 @@
-package apsu.demo.model.system
+package apsu.demo.model.physics.systems
 
 import apsu.core.System
-import apsu.demo.model.component.{Orientation, Spin, Position, Velocity}
+import apsu.demo.model.physics.components.{Position, Velocity}
 import apsu.core.world.{Update, World, Set}
 
 class Move extends System {

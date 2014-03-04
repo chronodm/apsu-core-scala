@@ -1,8 +1,8 @@
-package apsu.demo.model.system
+package apsu.demo.model.physics.systems
 
 import apsu.core.{Entity, System}
-import apsu.core.world.{Add, Set, Update, World}
-import apsu.demo.model.component.{Collision, BoundingBox}
+import apsu.core.world.{Add, Update, World}
+import apsu.demo.model.physics.components.{Collision, BoundingBox}
 
 class Collide extends System {
 

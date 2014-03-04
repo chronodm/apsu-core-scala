@@ -1,9 +1,12 @@
-package apsu.demo.model.system
+package apsu.demo.model.combat.systems
 
 import apsu.core.{Entity, System}
-import apsu.core.world.{Add, Remove, Update, World}
-import apsu.demo.model.component.command.FireCommand
-import apsu.demo.model.component.{Velocity, Bullet, Orientation, Position}
+import apsu.core.world.{Update, World}
+import apsu.core.world.Remove
+import apsu.core.world.Add
+import apsu.demo.model.physics.components.{Orientation, Position}
+import apsu.demo.controller.components.FireCommand
+import apsu.demo.model.combat.components.{Weapon, Bullet}
 
 class Fire extends System {
   override def invoke(w: World): Seq[Update] = {
@@ -23,4 +26,3 @@ class Fire extends System {
   }
 }
 
-case class Weapon(bulletVelocity: Velocity)

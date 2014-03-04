@@ -1,4 +1,4 @@
-package apsu.demo.model.component
+package apsu.demo.model.physics.components
 
 import math.abs
 

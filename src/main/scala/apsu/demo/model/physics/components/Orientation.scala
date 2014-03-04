@@ -1,4 +1,4 @@
-package apsu.demo.model.component
+package apsu.demo.model.physics.components
 
 case class Orientation(alpha: Double) {
   def +(w: Spin) = {
