@@ -1,4 +1,4 @@
-package apsu.demo.model.combat.components
+package apsu.demo.model.ships.components
 
 import apsu.demo.model.physics.components.Velocity
 

@@ -1,4 +1,4 @@
-package apsu.demo.model.physics.systems
+package apsu.demo.model.ships.systems
 
 import apsu.core.System
 import apsu.core.world.{Add, Update, World}
