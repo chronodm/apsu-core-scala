@@ -2,6 +2,9 @@ package apsu.core.world
 
 import apsu.core.Entity
 
+/**
+ * Superclass of all operations that can modify the state of a World
+ */
 sealed trait Update extends ((World) => Unit) {
 }
 
