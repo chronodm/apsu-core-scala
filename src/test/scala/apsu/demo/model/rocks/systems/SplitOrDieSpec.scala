@@ -9,8 +9,6 @@ import apsu.demo.model.physics.components.{Velocity, Position}
 import apsu.core.world.{RemoveAll, World}
 import scala.reflect.runtime.{universe => ru}
 import org.mockito.Mockito._
-import org.mockito.Matchers._
-import org.mockito.ArgumentMatcher
 
 class SplitOrDieSpec extends FlatSpec with Matchers with MockitoSugar {
 
