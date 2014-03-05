@@ -37,7 +37,7 @@ class CollideSpec extends FlatSpec with Matchers with MockitoSugar {
     updates should have size (4)
     val collisions: Map[Collision, Seq[Entity]] = updates.groupBy(u => u.components.head).map({
       case (c: Collision, s: Seq[Update]) => (c, s.flatMap({
-        case a: Add => a.entities
+        case a: Add[_] => a.entities
       }))
     })
     collisions should have size(2)
