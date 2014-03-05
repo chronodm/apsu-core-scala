@@ -16,6 +16,9 @@ case class Velocity private(deltaX: Double, deltaY: Double) {
 }
 
 object Velocity {
+
+  val Zero = Velocity(0, 0)
+
   // TODO test this
   def fromPolar(theta: Double, r: Double) = {
     val deltaX = r * Math.cos(theta)
