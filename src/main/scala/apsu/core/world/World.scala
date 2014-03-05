@@ -62,22 +62,22 @@ trait World {
    * Sets the specified component as the only component of that type
    * for the specified entity
    */
-  private[world] def set[C1](e: Entity, c: C1)
+  def set[C1](e: Entity, c: C1)
 
   /**
    * Adds the specified component to the specified entity
    */
-  private[world] def add[C1](e: Entity, c: C1)
+  def add[C1](e: Entity, c: C1)
 
   /**
    * Removes the specified component from the specified entity
    */
-  private[world] def remove[C1](e: Entity, c: C1)
+  def remove[C1](e: Entity, c: C1)
 
   /**
    * Removes all components from the specified entity
    */
-  private[world] def removeAll(e: Entity)
+  def removeAll(e: Entity)
 }
 
 
