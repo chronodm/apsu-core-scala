@@ -29,6 +29,13 @@ trait World {
       (implicit t1: ru.TypeTag[C1], t2: ru.TypeTag[C2], t3: ru.TypeTag[C3])
   :Seq[(Entity, (C1, C2, C3))]
 
+  /**
+   * Finds all entities with components of all specified types
+   */
+  def find[C1, C2, C3, C4]()
+      (implicit t1: ru.TypeTag[C1], t2: ru.TypeTag[C2], t3: ru.TypeTag[C3], t4: ru.TypeTag[C4])
+  :Seq[(Entity, (C1, C2, C3, C4))]
+
   // ---------------------------------------------
   // Component accessors for entities
 
@@ -66,6 +73,11 @@ trait World {
    * Removes the specified component from the specified entity
    */
   private[world] def remove[C1](e: Entity, c: C1)
+
+  /**
+   * Removes all components from the specified entity
+   */
+  private[world] def removeAll(e: Entity)
 }
 
 

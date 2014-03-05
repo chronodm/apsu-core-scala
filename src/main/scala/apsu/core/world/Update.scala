@@ -36,3 +36,11 @@ case class Remove[C1](e: Entity, c: C1) extends Update {
   }
 }
 
+/**
+ * Removes all components from the specified entity
+ */
+case class RemoveAll(e: Entity) extends Update {
+  override def apply(w: World): Unit = {
+    w.removeAll(e)
+  }
+}
