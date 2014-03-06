@@ -66,6 +66,8 @@ class SplitOrDieSpec extends FlatSpec with Matchers with MockitoSugar {
     /*
      TODO What that we want this to look like
 
+     invoke should return a Map[Entity, Seq[Update]]
+
      invoke should set rock(medium) for two new entities
      invoke should set the position for (first new entity) to (position)
      invoke should set the position for (second new entity) to (position)

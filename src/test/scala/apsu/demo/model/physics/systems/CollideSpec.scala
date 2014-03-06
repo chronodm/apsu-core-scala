@@ -72,6 +72,8 @@ class CollideSpec extends FlatSpec with Matchers with MockitoSugar {
     /*
      TODO What we want this to look like:
 
+     invoke should return a Map[Entity, Seq[Update]]
+
      invoke should add a collision for e1 and e2
      invoke should add a collision for e1 and e3
      invoke should not add a collision for e2 and e3
