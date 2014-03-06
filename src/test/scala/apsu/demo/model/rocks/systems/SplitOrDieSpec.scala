@@ -35,6 +35,12 @@ class SplitOrDieSpec extends FlatSpec with Matchers with MockitoSugar {
       case r: RemoveAll => (r.e == rockEntity)
       case _ => false
     }) should have size(1)
+
+    /*
+     TODO What that we want this to look like
+
+     invoke should remove all for e1
+     */
   }
 
   "invoke" should "turn big rocks into medium rocks at right angles and twice the speed" in {
@@ -57,20 +63,15 @@ class SplitOrDieSpec extends FlatSpec with Matchers with MockitoSugar {
     val splitOrDie = new SplitOrDie()
     for (u <- splitOrDie.invoke(world)) { u(world) }
 
-//    verify(world, times(2)).set(any(classOf[Entity]), argThat(new ArgumentMatcher[Rock] {
-//      override def matches(argument: scala.Any): Boolean = {
-//        argument match {
-//          case r: Rock if r.size == Size.Medium => true
-//          case _ => false
-//        }
-//      }
-//    }))
-//
-//    verify(world, times(2)).set(any(classOf[Entity]), argThat(new ArgumentMatcher[Position] {
-//      override def matches(argument: scala.Any): Boolean = {
-//        argument == position
-//      }
-//    }))
+    /*
+     TODO What that we want this to look like
+
+     invoke should set rock(medium) for two new entities
+     invoke should set the position for (first new entity) to (position)
+     invoke should set the position for (second new entity) to (position)
+     invoke should set the position for (first new entity) to (first velocity)
+     invoke should set the position for (second new entity) to (second velocity)
+     */
 
   }
 

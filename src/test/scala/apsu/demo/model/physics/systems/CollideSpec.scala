@@ -69,7 +69,14 @@ class CollideSpec extends FlatSpec with Matchers with MockitoSugar {
     val collide = new Collide()
     val updates = collide.invoke(world)
 
-    // TODO there has GOT to be a better way to do these assertions
+    /*
+     TODO What we want this to look like:
+
+     invoke should add a collision for e1 and e2
+     invoke should add a collision for e1 and e3
+     invoke should not add a collision for e2 and e3
+     */
+
 
     updates should have size 4
 
