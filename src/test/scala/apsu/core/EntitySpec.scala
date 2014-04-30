@@ -3,6 +3,7 @@ package apsu.core
 import org.scalatest.{FlatSpec, Matchers}
 import java.util.UUID
 import java.util
+import java.lang.reflect.Modifier
 
 class EntitySpec extends FlatSpec with Matchers {
 
@@ -10,6 +11,10 @@ class EntitySpec extends FlatSpec with Matchers {
     val count: Int = 100
     val uuids: Set[UUID] = (for (i <- 0 until count) yield Entity().id).toSet
     uuids.size should be(count)
+  }
+
+  it should "be final" in {
+    Modifier.isFinal(classOf[Entity].getModifiers) should be(true)
   }
 
   it should "take < 5us to create an Entity" in {
