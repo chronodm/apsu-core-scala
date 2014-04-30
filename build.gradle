@@ -1,5 +1,10 @@
 apply plugin: 'scala'
 
+apply plugin: 'maven'
+
+group = 'apsu'
+version = '1.0-SNAPSHOT'
+
 ext {
   scalaMajorVersion = '2.10'
   scalaVersion = "${scalaMajorVersion}.3"
