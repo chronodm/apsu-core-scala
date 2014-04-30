@@ -97,6 +97,8 @@ trait EntityManager {
    * @return An [Option] containing the old nickname for
    *         the entity, if present, or [None] if the entity
    *         did not have a nickname
+   * @throws IllegalArgumentException if the nickname already
+   *         exists for some other entity
    */
   def setNickname(e: Entity, nickname: String): Option[String]
 
@@ -109,6 +111,8 @@ trait EntityManager {
   /**
    * Creates a new entity with the specified nickname
    * @param nickname The nickname of the entity
+   * @throws IllegalArgumentException if the nickname already
+   *         exists for some other entity
    */
   @inline final def newEntity(nickname: String): Entity = {
     val e = newEntity()
