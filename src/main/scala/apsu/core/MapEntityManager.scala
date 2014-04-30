@@ -17,6 +17,7 @@ class MapEntityManager extends EntityManager {
   private val components = new mutable.OpenHashMap[ru.TypeTag[_], mutable.OpenHashMap[Entity, _]]()
 
   private val nicknames = new mutable.OpenHashMap[Entity, String]
+  private val nicknamesReverse = new mutable.OpenHashMap[String, Entity]
 
   // ------------------------------------------------------------
   // Private helpers
@@ -69,8 +70,13 @@ class MapEntityManager extends EntityManager {
   }
 
   override def setNickname(e: Entity, nickname: String): Option[String] = {
-    val old = nicknames.get(e)
-    nicknames(e) = nickname
-    old
+    nicknamesReverse.get(nickname) match {
+      case Some(other) => throw new IllegalArgumentException(s"Nickname '$nickname' already in use by entity ${other.id}")
+      case _ =>
+        val old = nicknames.get(e)
+        nicknames(e) = nickname
+        nicknamesReverse(nickname) = e
+        old
+    }
   }
 }
