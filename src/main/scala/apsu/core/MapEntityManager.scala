@@ -60,7 +60,9 @@ class MapEntityManager extends EntityManager {
     }
   }
 
-  override def allComponents(e: Entity): Iterable[Any] = ???
+  override def allComponents(e: Entity): Iterable[Any] = {
+    components.values.map((m) => m.get(e)).flatten
+  }
 
   override def getNickname(e: Entity): Option[String] = {
     nicknames.get(e)
