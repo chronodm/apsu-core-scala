@@ -10,6 +10,27 @@ import scala.reflect.runtime.{universe => ru}
 trait EntityManager {
 
   // ------------------------------------------------------------
+  // Entity creation helpers
+
+  /**
+   * Creates a new entity
+   * @return The new entity
+   */
+  @inline final def newEntity(): Entity = Entity()
+
+  /**
+   * Creates a new entity with the specified nickname
+   * @param nickname The nickname of the entity
+   * @throws IllegalArgumentException if the nickname already
+   *         exists for some other entity
+   */
+  @inline final def newEntity(nickname: String): Entity = {
+    val e = newEntity()
+    setNickname(e, nickname)
+    e
+  }
+
+  // ------------------------------------------------------------
   // Methods on single entities
 
   /**
@@ -53,6 +74,13 @@ trait EntityManager {
    * otherwise
    */
   @inline final def has[C1](e: Entity)(implicit t: ru.TypeTag[C1]): Boolean = get[C1](e).isDefined
+
+  /**
+   * Removes the specified entity, removing all its components
+   * and freeing up its nickname.
+   * @param e The entity to remove.
+   */
+  def delete(e: Entity)
 
   // ------------------------------------------------------------
   // Cross-entity methods
@@ -103,20 +131,10 @@ trait EntityManager {
   def setNickname(e: Entity, nickname: String): Option[String]
 
   /**
-   * Creates a new entity
-   * @return The new entity
+   * Clears any nickname set for the specified entity.
+   * @param e The entity
+   * @return The old nickname, if any
    */
-  @inline final def newEntity(): Entity = Entity()
+  def clearNickname(e: Entity): Option[String]
 
-  /**
-   * Creates a new entity with the specified nickname
-   * @param nickname The nickname of the entity
-   * @throws IllegalArgumentException if the nickname already
-   *         exists for some other entity
-   */
-  @inline final def newEntity(nickname: String): Entity = {
-    val e = newEntity()
-    setNickname(e, nickname)
-    e
-  }
 }

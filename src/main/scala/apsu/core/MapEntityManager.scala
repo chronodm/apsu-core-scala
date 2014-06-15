@@ -5,7 +5,7 @@ import scala.reflect.runtime.{universe => ru}
 import scala.collection.mutable
 
 /**
- * MapEntityManager
+ * A basic [[EntityManager]] implementation using [[mutable.OpenHashMap]]
  *
  * @author david
  */
@@ -54,6 +54,12 @@ class MapEntityManager extends EntityManager {
     }
   }
 
+
+  override def delete(e: Entity): Unit = {
+    components.values.foreach(_.remove(e))
+    clearNickname(e)
+  }
+
   override def all[C1](implicit t: ru.TypeTag[C1]): Iterable[(Entity, C1)] = {
     mapFor[C1] match {
       case Some(m) => m
@@ -77,6 +83,15 @@ class MapEntityManager extends EntityManager {
         nicknames(e) = nickname
         nicknamesReverse(nickname) = e
         old
+    }
+  }
+
+  override def clearNickname(e: Entity): Option[String] = {
+    nicknames.remove(e) match {
+      case Some(nn) =>
+        nicknamesReverse.remove(nn)
+        Some(nn)
+      case _ => None
     }
   }
 }
