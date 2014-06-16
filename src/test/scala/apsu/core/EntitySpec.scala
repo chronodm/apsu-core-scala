@@ -23,11 +23,11 @@ class EntitySpec extends FlatSpec with Matchers {
 
     val times = new Array[Long](runs)
     for (i <- 0 until runs) {
-      val start = System.nanoTime()
+      val start = java.lang.System.nanoTime()
       for (j <- 0 until count) {
         Entity()
       }
-      times(i) = System.nanoTime() - start
+      times(i) = java.lang.System.nanoTime() - start
     }
     util.Arrays.sort(times)
     val median = times(runs / 2) / count.asInstanceOf[Double]
