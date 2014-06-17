@@ -14,6 +14,8 @@ class MapEntityManager extends EntityManager {
   // ------------------------------------------------------------
   // Fields
 
+  private val et: ru.TypeTag[Entity] = ru.typeTag[Entity]
+
   private val components = new mutable.OpenHashMap[ru.TypeTag[_], mutable.OpenHashMap[Entity, _]]()
 
   private val nicknames = new mutable.OpenHashMap[Entity, String]
@@ -23,6 +25,9 @@ class MapEntityManager extends EntityManager {
   // Private helpers
 
   private def mapFor[C1](implicit t: ru.TypeTag[C1]): Option[mutable.OpenHashMap[Entity, C1]] = {
+    if (t == et) {
+      throw new IllegalArgumentException(s"Entities cannot be components")
+    }
     components.get(t).asInstanceOf[Option[mutable.OpenHashMap[Entity, C1]]]
   }
 
