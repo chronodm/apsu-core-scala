@@ -48,7 +48,7 @@ trait EntityManager {
    * Sets the component of the specified type for the
    * specified entity.
    * @param e The entity to set the component for.
-   * @param c The component to set.
+   * @param c The component to set. Cannot itself be an entity.
    * @tparam C1 The component type
    */
   def set[C1](e: Entity, c: C1)(implicit t: ru.TypeTag[C1])

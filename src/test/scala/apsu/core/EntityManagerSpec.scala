@@ -83,6 +83,17 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
     mgr.get[OtherComponent](e) should be(Some(c1))
   }
 
+  it should "disallow setting an entity as a component" in { mgr =>
+    val e = mgr.newEntity()
+    val e1 = Entity()
+    evaluating({
+      mgr.set(e, e1)
+    }) should produce[IllegalArgumentException]
+    evaluating({
+      mgr.set(e1, e)
+    }) should produce[IllegalArgumentException]
+  }
+
   "get()" should "return None for unset components" in { mgr =>
     val e = mgr.newEntity()
     mgr.get[SomeComponent](e) should be(None)
