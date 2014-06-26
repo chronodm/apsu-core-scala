@@ -28,5 +28,5 @@ object System {
    * to seconds, using multiplication rather than division
    * for efficiency
    */
-  final val secondsPerMicro = 1e-6
+  final val secondsPerMicro = 1e-6f
 }
