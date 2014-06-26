@@ -92,10 +92,36 @@ trait EntityManager {
    *
    * @tparam C1 The component type
    * @return All entity-component pairs for the specified component
-   *         type, or an empty [Iterable] if no entities with the
+   *         type, or an empty Iterable if no entities with the
    *         specified component type exist.
    */
   def all[C1](implicit t: ru.TypeTag[C1]): Iterable[(Entity, C1)]
+
+  /**
+   * Executes the specified function on each entity-component pair
+   * for the specified component type, and returns the result.
+   * @param f The function to execute
+   * @tparam C1 The component type
+   * @tparam T The return type of the function
+   * @return An Iterable containing the result of each function invocation,
+   *         or an empty Iterable if no entities with the
+   *         specified component type exist.
+   */
+  def forAll[C1, T](f: (Entity, C1) => T)(implicit t: ru.TypeTag[C1]): Iterable[T] = {
+    all[C1].map { case (e, c) =>
+      f(e, c)
+    }
+  }
+
+  /**
+   * Executes the specified function on each entity-component pair
+   * for the specified component type, and discards the result.
+   * @param f The function to execute
+   * @tparam C1 The component type
+   */
+  def forAll[C1](f: (Entity, C1) => Unit)(implicit t: ru.TypeTag[C1]) {
+    forAll[C1, Unit](f)
+  }
 
   // ------------------------------------------------------------
   // Convenience methods
