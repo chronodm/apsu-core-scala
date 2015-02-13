@@ -1,6 +1,8 @@
 package apsu.core
 
+import org.scalatest.mock.MockitoSugar
 import org.scalatest.{fixture, Matchers}
+import org.mockito.Mockito._
 
 import scala.collection.mutable
 
@@ -9,7 +11,7 @@ import scala.collection.mutable
  *
  * @author david
  */
-trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matchers {
+trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matchers with MockitoSugar {
 
   // ------------------------------------------------------------
   // Fixture
@@ -21,6 +23,7 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
   def withFixture(test: OneArgTest) = withFixture(test.toNoArgTest(createManager))
 
   case class SomeComponent(id: Int)
+
   case class OtherComponent(id: Int)
 
   // ------------------------------------------------------------
@@ -48,7 +51,7 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
 
   it should "not allow the same nickname for multiple entities" in { mgr =>
     val e = mgr.newEntity("foo")
-    evaluating { mgr.newEntity("foo") } should produce[IllegalArgumentException]
+    evaluating {mgr.newEntity("foo")} should produce[IllegalArgumentException]
     mgr.getNickname(e).get should be("foo")
   }
 
@@ -168,7 +171,60 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
     mgr.set(e2, oc2)
 
     mgr.all[SomeComponent].toStream should contain only((e0, sc0), (e1, sc1))
-    mgr.all[OtherComponent].toStream should contain only((e2, oc2))
+    mgr.all[OtherComponent].toStream should contain only ((e2, oc2))
+  }
+
+  // ------------------------------------------------------------
+  // forAll()
+
+  "forAll()" should "return result for all and only entities with specified component type" in { mgr =>
+    val e0 = mgr.newEntity()
+    val e1 = mgr.newEntity()
+    val e2 = mgr.newEntity()
+    val sc0 = SomeComponent(0)
+    val sc1 = SomeComponent(1)
+    val oc2 = OtherComponent(2)
+
+    mgr.set(e0, sc0)
+    mgr.set(e1, sc1)
+    mgr.set(e2, oc2)
+
+    def f0(e: Entity, c: SomeComponent) = {
+      s"$e $c"
+    }
+
+    def f1(e: Entity, c: OtherComponent) = {
+      s"$e $c"
+    }
+
+    mgr.forAll[SomeComponent, String](f0).toStream should contain only(s"$e0 $sc0", s"$e1 $sc1")
+    mgr.forAll[OtherComponent, String](f1).toStream should contain only s"$e2 $oc2"
+  }
+
+  "forAll()" should "execute on all and only entities with specified component type" in { mgr =>
+    val e0 = mgr.newEntity()
+    val e1 = mgr.newEntity()
+    val e2 = mgr.newEntity()
+    val sc0 = SomeComponent(0)
+    val sc1 = SomeComponent(1)
+    val oc2 = OtherComponent(2)
+
+    mgr.set(e0, sc0)
+    mgr.set(e1, sc1)
+    mgr.set(e2, oc2)
+
+    val f0: (Entity, SomeComponent) => Unit = mock[(Entity, SomeComponent) => Unit]
+    val f1: (Entity, OtherComponent) => Unit = mock[(Entity, OtherComponent) => Unit]
+
+    mgr.forAll[SomeComponent](f0)
+    mgr.forAll[OtherComponent](f1)
+
+    verify(f0).apply(e0, sc0)
+    verify(f0).apply(e1, sc1)
+    verifyNoMoreInteractions(f0)
+
+    verify(f1).apply(e2, oc2)
+    verifyNoMoreInteractions(f1)
   }
 
   // ------------------------------------------------------------
@@ -196,7 +252,7 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
   "setNickname()/getNickname()" should "set/get a nickname" in { mgr =>
     val e = mgr.newEntity()
     mgr.setNickname(e, "foo")
-    mgr.getNickname(e) should be (Some("foo"))
+    mgr.getNickname(e) should be(Some("foo"))
   }
 
   "clearNickname" should "remove a nickname" in { mgr =>
