@@ -58,7 +58,7 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
   "set()/get()" should "set/get a component" in { mgr =>
     val e = mgr.newEntity()
     val c = SomeComponent(0)
-    
+
     mgr.set(e, c)
     mgr.get[SomeComponent](e) should be(Some(c))
   }
@@ -140,6 +140,9 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
 
     mgr.has[SomeComponent](e) should be(false)
     mgr.has[OtherComponent](e) should be(false)
+
+    mgr.all[SomeComponent] should be(empty)
+    mgr.all[OtherComponent] should be(empty)
   }
 
   it should "clear nicknames" in { mgr =>
