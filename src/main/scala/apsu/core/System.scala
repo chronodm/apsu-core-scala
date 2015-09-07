@@ -19,7 +19,7 @@ trait System {
    * @param deltaMicros The time delta of the current tick,
    *              in microseconds
    */
-  def processTick(deltaMicros: Long)
+  def processTick(deltaMicros: Long): Unit
 }
 
 object System {

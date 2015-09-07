@@ -52,7 +52,7 @@ trait EntityManager {
    * @tparam C1 The component type
    * @throws IllegalArgumentException if <code>c</code> is an entity.
    */
-  def set[C1](e: Entity, c: C1)(implicit t: ru.TypeTag[C1])
+  def set[C1](e: Entity, c: C1)(implicit t: ru.TypeTag[C1]): Unit
 
   /**
    * Removes the component of the specified type from
@@ -81,7 +81,7 @@ trait EntityManager {
    * and freeing up its nickname.
    * @param e The entity to remove.
    */
-  def delete(e: Entity)
+  def delete(e: Entity): Unit
 
   // ------------------------------------------------------------
   // Cross-entity methods
@@ -119,8 +119,12 @@ trait EntityManager {
    * @param f The function to execute
    * @tparam C1 The component type
    */
-  def forAll[C1](f: (Entity, C1) => Unit)(implicit t: ru.TypeTag[C1]) {
+  def forAll[C1](f: (Entity, C1) => Unit)(implicit t: ru.TypeTag[C1]): Unit = {
     forAll[C1, Unit](f)
+  }
+
+  def first[C1](implicit t: ru.TypeTag[C1]): Option[(Entity, C1)] = {
+    all[C1].headOption
   }
 
   // ------------------------------------------------------------

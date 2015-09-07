@@ -98,6 +98,21 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
     mgr.get[SomeComponent](e) should be(None)
   }
 
+  "first()" should "return the first entity with the specified component type" in { mgr =>
+    val e0 = mgr.newEntity()
+    val e1 = mgr.newEntity()
+    val c0 = SomeComponent(0)
+    val c1 = SomeComponent(1)
+    mgr.set(e1, c1)
+    mgr.set(e0, c0)
+    val first = mgr.all[SomeComponent].head
+    mgr.first[SomeComponent] should be(Some(first))
+  }
+
+  it should "return None for unset components" in { mgr =>
+    mgr.first[OtherComponent] should be(None)
+  }
+
   "has()" should "return true for set components" in { mgr =>
     val e = mgr.newEntity()
     val c = SomeComponent(0)
