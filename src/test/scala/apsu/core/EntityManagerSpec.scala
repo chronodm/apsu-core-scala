@@ -51,7 +51,7 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
 
   it should "not allow the same nickname for multiple entities" in { mgr =>
     val e = mgr.newEntity("foo")
-    evaluating {mgr.newEntity("foo")} should produce[IllegalArgumentException]
+    an[IllegalArgumentException] should be thrownBy {mgr.newEntity("foo")}
     mgr.getNickname(e).get should be("foo")
   }
 
@@ -89,12 +89,8 @@ trait EntityManagerSpec[T <: EntityManager] extends fixture.FlatSpec with Matche
   it should "disallow setting an entity as a component" in { mgr =>
     val e = mgr.newEntity()
     val e1 = Entity()
-    evaluating({
-      mgr.set(e, e1)
-    }) should produce[IllegalArgumentException]
-    evaluating({
-      mgr.set(e1, e)
-    }) should produce[IllegalArgumentException]
+    an[IllegalArgumentException] should be thrownBy {mgr.set(e, e1)}
+    an[IllegalArgumentException] should be thrownBy {mgr.set(e1, e)}
   }
 
   "get()" should "return None for unset components" in { mgr =>
