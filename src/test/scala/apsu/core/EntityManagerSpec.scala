@@ -1,6 +1,6 @@
 package apsu.core
 
-import org.scalatest.mock.MockitoSugar
+import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{fixture, Matchers}
 import org.mockito.Mockito._
 

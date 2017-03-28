@@ -1,15 +1,15 @@
 plugins {
     id "scala"
     id "maven"
-    id "com.github.maiflai.scalatest" version "0.6-5-g9065d91"
 }
 
 group = 'apsu'
 version = '1.0-SNAPSHOT'
 
 ext {
-  scalaMajorVersion = '2.11'
-  scalaVersion = "${scalaMajorVersion}.5"
+  scalaMajorVersion = '2.12'
+  scalaMinorVersion = '1'
+  scalaVersion = "${scalaMajorVersion}.${scalaMinorVersion}"
 }
 
 repositories {
@@ -34,7 +34,7 @@ dependencies {
   // ------------------------------------------------------------
   // Testing
 
-  testCompile "org.scalatest:scalatest_${scalaMajorVersion}:2.2.4"
+  testCompile "org.scalatest:scalatest_${scalaMajorVersion}:3.0.1"
   testCompile 'junit:junit:4.11'
   testCompile 'org.mockito:mockito-core:1.9.5'
 
@@ -42,30 +42,13 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    gradleVersion = '3.3'
 }
 
-compileScala {
-    scalaCompileOptions.fork = true
-    scalaCompileOptions.forkOptions.jvmArgs = ['-XX:MaxPermSize=512m']
-    scalaCompileOptions.additionalParameters = [
-            "-feature",
-            "-language:reflectiveCalls", // used for config structural typing
-            "-language:postfixOps"
-    ]
+task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
+  main = 'org.scalatest.tools.Runner'
+  args = ['-R', 'build/classes/test', '-o']
+  classpath = sourceSets.test.runtimeClasspath
 }
 
-//test {
-//  jvmArgs '-XX:MaxPermSize=512m'
-//  ant.taskdef(name: 'scalatest',
-//      classname: 'org.scalatest.tools.ScalaTestAntTask',
-//      classpath: sourceSets.test.runtimeClasspath.asPath
-//  )
-//  ant.scalatest(runpath: sourceSets.test.output.classesDir,
-//      haltonfailure: 'true',
-//      fork: 'false') {
-//    reporter(type: 'junitxml', directory: 'test-reports')
-//    reporter(type: 'stderr')
-//    if (System.properties.test) suite(classname: System.properties.test)
-//  }
-//}
+test.dependsOn scalaTest
